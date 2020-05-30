@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Создано Microsoft Visio, экспорт SVG vteg.svg Page-1 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		width="1.85039in" height="3.26772in" viewBox="0 0 133.228 235.276" xml:space="preserve" color-interpolation-filters="sRGB"
+		class="st7">
+	<style type="text/css">
+	<![CDATA[
+		.st2 {fill:none;stroke:#bfbfbf;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+	]]>
+	</style>
+		<g id="shape37-10" transform="translate(0,0)" data-id="{'tag':'U1/RAM/iSwState', 'model':'TSwitch'}">
+			<rect x="0" y="0" width="17.0079" height="17.0079" class="st2"/>
+		</g>
+		<g id="shape43-16" transform="translate(0,20)" data-id="{'tag':'U1/RAM/DIN.1(C1_DC)', 'model':'TSwitch'}">
+			<rect x="0" y="0" width="17.0079" height="17.0079" class="st2"/>
+		</g>
+		<g id="shape48-23" transform="translate(20,20)" data-id="{'tag':'U1/RAM/DIN.3(C2_DC)', 'model':'TSwitch'}">
+			<rect x="0" y="0" width="17.0079" height="17.0079" class="st2"/>
+		</g>
+		<g id="shape53-29" transform="translate(0,40)" data-id="{'tag':'U1/RAM/DIN.0(C1_AC)', 'model':'TSwitch'}">
+			<rect x="0" y="0" width="17.0079" height="17.0079" class="st2"/>
+		</g>
+		<g id="shape54-31" transform="translate(20,40)" data-id="{'tag':'U1/RAM/DIN.2(C2_AC)', 'model':'TSwitch'}">
+			<rect x="0" y="0" width="17.0079" height="17.0079" class="st2"/>
+		</g>
+</svg>
