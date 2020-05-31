@@ -1,5 +1,4 @@
 import {TSVGComponent} from "./TSVGComponent";
-import TText from "./TText";
 import TSwitch from "./TSwitch";
 import { TSVGTemplateElement } from "../svggroup";
 
@@ -13,7 +12,6 @@ export class TSVGComponentInitialArgs {
 export function createSVGComponent (args: TSVGComponentInitialArgs): TSVGComponent | undefined {
         const model: string = args.model || 'default';
         const models: {[index: string]: any} = {
-            'text'  : () => {return new TText(args)},
             'TSwitch': () => {return new TSwitch(args)},
             'default': () => {
                 console.log(`${model} not found`)

@@ -10,16 +10,33 @@ export function  changeSingleQuotesToDouble(attr: string): any {
 //Возвращает:
 //  1) строку с содержимым файла 
 //  2) undefine - если файл по какой-то причине не загрузился
-export function getSyncTextFileContent(fileName: string): string {
-    var req = new XMLHttpRequest();
-        req.open("GET", fileName, false);//false - делаю сихронный запрос к http-серверу 
-        req.send();
-        if (req.status !==200) {//ошибка
-            return '';
-        }
-        else {//получил содержимое файла в виде строки
-            return req.responseText;//да, документ получил. Можно парсить
-        }
+async function getTextByURL (url: string) {
+    try {
+        const res  = await fetch(url)
+        const text = await res.text();
+        return text;
+    } catch (e) {
+        console.log('getObjectURL:', e)
+        return ''
+    }
+}
+
+async function blobToDataURL(blob: any) {
+    return new Promise<any>((resolve, reject) => {
+        var reader = new FileReader();
+        reader.onload = () => {
+            resolve(reader.result);
+        };
+        reader.readAsDataURL(blob);
+    });
+}
+
+export async function getObjectURL(url: string) {
+    const text: string = await getTextByURL(url)
+    var DataURL = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(text);
+    //const DataURL = await blobToDataURL(blob);
+    return DataURL;
+    //return window.URL.createObjectURL(blob)
 }
 
 //преобоазует строку в XML-объект (в зависимости от ключа)
