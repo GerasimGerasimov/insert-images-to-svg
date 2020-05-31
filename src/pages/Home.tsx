@@ -37,12 +37,11 @@ export default class Home extends Component <{}, IState> {
   }
 
   render() {
-
+    //              <p>{key + this.state.count}</p>
     const ImagesList = Array.from(svgContents.Contents.entries(),
       ([key, item]) => {
           return (
             <li key={key}>
-              <p>{key + this.state.count}</p>
               <img src={item} alt=""/>
             </li>
           )
