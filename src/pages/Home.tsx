@@ -43,6 +43,7 @@ export default class Home extends Component <{}, IState> {
       let value = (item.value === '1')? '0' : "1";
       this.DataSet.set(key, {value})
     })
+    this.putValuesToSVGTemplate(true);
   }
 
   private getData(tag: string, properties: Array<string>): any{
