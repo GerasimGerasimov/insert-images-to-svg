@@ -70,24 +70,13 @@ export default class TSwitch extends TSVGComponent{
             fo.setAttribute('y', box.y);
             fo.setAttribute('width', box.width);
             fo.setAttribute('height', box.height);
-            fo.setAttribute('href', content)
-            //fo.src = content;
+            fo.setAttribute('href', content);
             //добавляю FO к контеннеру
             container.appendChild(fo);
             console.log(this.tag,' : ', this.stage, container.id, box);
         } else {//уже есть image, тогда меняю только его xref
             fo.setAttribute('href', content)
         }
-        /*
-        //3) если в FO уже вставлен SVG то надо его удалить и заменить новым
-        var svg: any = fo.querySelector('svg');
-        if (svg !== null) {
-            //fo.removeChild(svg);
-        }
-        //теперь добавлю новый svg-элемент в FO если content не undefined)
-        if (content) {
-            //fo.appendChild(content);
-        }*/
     }
 
 }

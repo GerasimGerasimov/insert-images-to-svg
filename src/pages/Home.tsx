@@ -15,6 +15,7 @@ export default class Home extends Component <{}, IState> {
   private svgComponents: Array<TSVGComponent> = [];
   private DataSet: Map <string, any> = new Map();
   private handlers: Array<any> = [];
+  private timer: any;
 
   constructor (props: any){
     super(props)
@@ -25,12 +26,25 @@ export default class Home extends Component <{}, IState> {
       const value:any = DataSet[key];
       this.DataSet.set(key, value)
     }
+
+    this.timer = setInterval(this.tick.bind(this), 1000);
   }
 
   private putValuesToSVGTemplate(changed: any){
+    this.DataSet.forEach((item, key)=>{
+      console.log(item.value);
+    })
     drawComponents(this.svgComponents, this.getData.bind(this));
   }
  
+  private tick(){
+    console.log('tick');
+    this.DataSet.forEach((item, key)=>{
+      let value = (item.value === '1')? '0' : "1";
+      this.DataSet.set(key, {value})
+    })
+  }
+
   private getData(tag: string, properties: Array<string>): any{
     const item: any = this.DataSet.get(tag);
     return item
