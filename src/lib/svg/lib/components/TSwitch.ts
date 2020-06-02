@@ -36,7 +36,7 @@ export default class TSwitch extends TSVGComponent{
 
     //функция-отдаёт изображение по ключу из массива SVG-изображений.
 	private getImage(key: string): any {
-        return this.svgArray.getImg(key);
+        return this.svgArray.getLoadedImg(key);
     }
 
 	//Отрисовка компонента в контейнере(если состояние изменилось)
@@ -56,7 +56,7 @@ export default class TSwitch extends TSVGComponent{
                     content = undefined;
         }
         //2) разбираюсь с FO
-        var fo: any = container.querySelector('foreignObject');
+        var fo: any = container.querySelector('image');
         var box: any;//DOMRect;
         if (fo === null) {
             //если FO ещё не встроен, то создать и встроить
@@ -64,25 +64,30 @@ export default class TSwitch extends TSVGComponent{
             var rect: any  = container.querySelector('rect');
             box = rect.getBBox();
             //Создаю FO
-            fo = document.createElementNS('http://www.w3.org/2000/svg','foreignObject');
+            fo = document.createElementNS('http://www.w3.org/2000/svg','image');
             //Устанавливаю аттрибуты размеров FO
             fo.setAttribute('x', box.x);
             fo.setAttribute('y', box.y);
             fo.setAttribute('width', box.width);
             fo.setAttribute('height', box.height);
+            fo.setAttribute('href', content)
+            //fo.src = content;
             //добавляю FO к контеннеру
             container.appendChild(fo);
             console.log(this.tag,' : ', this.stage, container.id, box);
+        } else {//уже есть image, тогда меняю только его xref
+            fo.setAttribute('href', content)
         }
+        /*
         //3) если в FO уже вставлен SVG то надо его удалить и заменить новым
         var svg: any = fo.querySelector('svg');
         if (svg !== null) {
-            fo.removeChild(svg);
+            //fo.removeChild(svg);
         }
         //теперь добавлю новый svg-элемент в FO если content не undefined)
         if (content) {
-            fo.appendChild(content);
-        }
+            //fo.appendChild(content);
+        }*/
     }
 
 }

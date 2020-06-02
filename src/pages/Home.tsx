@@ -5,6 +5,7 @@ import {TSVGComponent, getTags, drawComponents} from '../lib/svg/lib/components/
 import { createSVGComponents } from '../lib/svg/lib/components/svgCompFactory'
 import { svgContents } from '../lib/svg/svgloadimages'
 import { getObjectURL } from '../lib/svg/lib/utils'
+import { DataSet } from '../dataset/dataset'
 
 interface IState {
   count: number;
@@ -12,6 +13,7 @@ interface IState {
 
 export default class Home extends Component <{}, IState> {
   private svgComponents: Array<TSVGComponent> = [];
+  private DataSet: Map <string, any> = new Map();
   private handlers: Array<any> = [];
 
   constructor (props: any){
@@ -19,16 +21,40 @@ export default class Home extends Component <{}, IState> {
     this.state = {
       count: 0
     };
+    for (let key in DataSet){
+      const value:any = DataSet[key];
+      this.DataSet.set(key, value)
+    }
+  }
+
+  private putValuesToSVGTemplate(changed: any){
+    drawComponents(this.svgComponents, this.getData.bind(this));
+  }
+ 
+  private getData(tag: string, properties: Array<string>): any{
+    const item: any = this.DataSet.get(tag);
+    return item
+  }
+
+  private createAutorunInitiatorValues(){
+    //запустить автообновление при изменении времени появления новой инфы
+    //const changes: Array<any> = devicesInfoStore.getObservableValues(getTags(this.svgComponents))
+    //this.handlers = changes.map(item => autorun(()=>{this.putValuesToSVGTemplate(item.time)}))
   }
 
   handleImageLoaded() {
     console.log('svg загружен');
+    const elements: Array<TSVGTemplateElement> = loadSVGTemplateElements('vteg');
+    this.svgComponents = createSVGComponents(elements)
+    //this.createAutorunInitiatorValues();
   }
 
   handleClick(){
+    /*
     svgContents.aContents.forEach((value, key) => {
       console.log(`${key} : ${value}`)
-    })
+    })*/
+    this.putValuesToSVGTemplate(true);
     this.setState((state) => {
       return {
         count: state.count + 1

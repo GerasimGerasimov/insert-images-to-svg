@@ -7,9 +7,15 @@ export class TSvgContents {
         return this.aContents;
     }
 
+    public getLoadedImg(key: string) {
+        return this.aContents.get(key);
+    }
+
     public async getImg (key: string, path: string = '') {//key-название картинки, path-имя файла с путём до неё
         const content: any = this.aContents.get(key);
-        if (content) return content;
+        if (content !== undefined) {
+          return content;
+        }
         var ObjectURL: any = await this.loadImg(key, path);
         if (ObjectURL!== undefined) {
             this.aContents.set(key, ObjectURL);//вставляю в хранилище

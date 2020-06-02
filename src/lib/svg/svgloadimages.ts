@@ -4,7 +4,6 @@ export const svgContents = new TSvgContents();
 
 export function loadSVGImages() {
     //загрузить SVG-шки выключателя
-    svgContents.getImg('switchNoLink2', '/assets/svg/switchNoLink.svg');
     svgContents.getImg('switchNoLink', '/assets/svg/switchNoLink.svg');    
     svgContents.getImg('switchOn'   ,  '/assets/svg/switchOn.svg');
     svgContents.getImg('switchOff'  ,  '/assets/svg/switchOff.svg');

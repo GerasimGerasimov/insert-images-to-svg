@@ -39,9 +39,10 @@ interface IDataSource
   
 export function drawComponents(components: Array<TSVGComponent>, getData: IDataSource) {
   components.forEach((item: TSVGComponent) => {
-    const {value, msu} = getData(item.Tag, ['value','msu']);
+    let {value, msu} = getData(item.Tag, ['value','msu']);
+    msu = msu || ''
     let state: TSVGComponentArg = {
-        value: `${value} ${msu}`,
+        value: `${value}${msu}`,
         valid: true
       }
     item.setState(state)
