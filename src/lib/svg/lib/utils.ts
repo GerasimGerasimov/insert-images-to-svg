@@ -21,22 +21,10 @@ async function getTextByURL (url: string) {
     }
 }
 
-async function blobToDataURL(blob: any) {
-    return new Promise<any>((resolve, reject) => {
-        var reader = new FileReader();
-        reader.onload = () => {
-            resolve(reader.result);
-        };
-        reader.readAsDataURL(blob);
-    });
-}
-
 export async function getObjectURL(url: string) {
     const text: string = await getTextByURL(url)
     var DataURL = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(text);
-    //const DataURL = await blobToDataURL(blob);
     return DataURL;
-    //return window.URL.createObjectURL(blob)
 }
 
 //преобоазует строку в XML-объект (в зависимости от ключа)

@@ -2,7 +2,6 @@ import {TSvgContents} from '../svgcontent'
 import {TSVGComponent, TSVGComponentArg}  from './TSVGComponent'
 import { svgContents } from '../../svgloadimages';
 import { TSVGComponentInitialArgs } from './svgCompFactory';
-import { randomStringAsBase64Url } from '../../../util/cryputils';
 //TODO менять stege в зависимости от входящего value
 //компоненты на структурной схеме
 const stages: any = {

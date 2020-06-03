@@ -4,7 +4,6 @@ import {TSVGTemplateElement, loadSVGTemplateElements} from '../lib/svg/lib/svggr
 import {TSVGComponent, getTags, drawComponents} from '../lib/svg/lib/components/TSVGComponent'
 import { createSVGComponents } from '../lib/svg/lib/components/svgCompFactory'
 import { svgContents } from '../lib/svg/svgloadimages'
-import { getObjectURL } from '../lib/svg/lib/utils'
 import { DataSet } from '../dataset/dataset'
 
 interface IState {
