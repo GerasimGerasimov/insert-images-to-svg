@@ -5,29 +5,24 @@ import { TSVGComponentInitialArgs } from './svgCompFactory';
 import { randomStringAsBase64Url } from '../../../util/cryputils';
 //TODO менять stege в зависимости от входящего value
 //компоненты на структурной схеме
+const stages: any = {
+    ON : 'switchOn',
+    OFF:'switchOff'
+}
 
 export default class TSwitch extends TSVGComponent{
 
     private svgArray: TSvgContents = svgContents;//массива SVG изображений с доступом по ключу
-    //private images: Map<string, any> = new Map();
-    private stage: string | undefined = undefined;
+    private stage: string= '';
     private prevStage: string | undefined = undefined;
  
     constructor (args: TSVGComponentInitialArgs) {
         super(args);
-        /*
-        this.svgArray.Contents.forEach ((value, key) => {
-            const newClassName: string = randomStringAsBase64Url(4);
-            const image = this.svgArray.renameCSS(newClassName, value);
-            this.images.set(key, image)
-            console.log(this.tag, ' : ',key, ':', newClassName)
-        })
-        */
     }
 
     public setState(arg:TSVGComponentArg): boolean {
         if (!arg.value) {
-            this.stage = undefined;
+            this.stage = '';
         } else {
             this.stage = (arg.value.trim() === '1')? 'ON':'OFF'
         }
@@ -35,26 +30,16 @@ export default class TSwitch extends TSVGComponent{
     }
 
     //функция-отдаёт изображение по ключу из массива SVG-изображений.
-	private getImage(key: string): any {
-        return this.svgArray.getLoadedImg(key);
+	private async getImageByStage(): Promise<any | undefined> {
+        return await this.svgArray.getImg(stages[this.stage]) || undefined;
     }
 
 	//Отрисовка компонента в контейнере(если состояние изменилось)
-    public draw(){
+    public async draw(){
         const container: any = this.SVGconteiner;
         if (container === undefined) return;
         //1) подготовка нового SVG согласно состояния
-        var content: any;
-        switch (this.stage) {
-            case 'ON':
-                    content = this.getImage('switchOn');
-                break;
-            case 'OFF':
-                    content = this.getImage('switchOff');
-                break;
-            default:
-                    content = undefined;
-        }
+        var content: any = await this.getImageByStage();
         //2) разбираюсь с FO
         var fo: any = container.querySelector('image');
         var box: any;//DOMRect;

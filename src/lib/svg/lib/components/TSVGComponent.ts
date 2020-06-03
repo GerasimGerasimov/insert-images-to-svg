@@ -21,7 +21,7 @@ export class TSVGComponent {
     public setState(arg: TSVGComponentArg): boolean { return false}
 
 	//Отрисовка компонента в контейнере(если состояние изменилось)
-    public draw(){}
+    public async draw(){}
 }
 
 export function getTags(components: Array<TSVGComponent>): Array<string> {
@@ -38,7 +38,7 @@ interface IDataSource
   };
   
 export function drawComponents(components: Array<TSVGComponent>, getData: IDataSource) {
-  components.forEach((item: TSVGComponent) => {
+  components.forEach(async (item: TSVGComponent) => {
     let {value, msu} = getData(item.Tag, ['value','msu']);
     msu = msu || ''
     let state: TSVGComponentArg = {
@@ -46,6 +46,6 @@ export function drawComponents(components: Array<TSVGComponent>, getData: IDataS
         valid: true
       }
     item.setState(state)
-    item.draw();
+    await item.draw();
   })
 }
