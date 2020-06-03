@@ -12,16 +12,32 @@ export class TSvgContents {
     }
 
     public async getImg (key: string, path: string = '') {//key-название картинки, path-имя файла с путём до неё
+        var content: any = this.aContents.get(key);
+        if (content !== undefined) {
+          return content;
+        } else {
+            content = await getObjectURL(path);
+            if (content!== undefined) {
+                this.aContents.set(key, content);//вставляю в хранилище
+                return content;
+            }
+        }
+    }
+
+    /*
+    public getImg (key: string, path: string = '') {//key-название картинки, path-имя файла с путём до неё
         const content: any = this.aContents.get(key);
         if (content !== undefined) {
           return content;
         }
+        //асинхронная часть
         var ObjectURL: any = await this.loadImg(key, path);
         if (ObjectURL!== undefined) {
             this.aContents.set(key, ObjectURL);//вставляю в хранилище
             return ObjectURL;
         }
     }
+    */
 
     private async loadImg (key: string, path: string) {
         var ObjectURL: any = await getObjectURL(path);
